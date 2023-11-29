@@ -1,0 +1,12 @@
+uuid
+requests
+hashlib
+json
+os
+time
+pyaudio
+base64
+pocketsphinx
+openai
+unittest
+pocketsphinx
