@@ -2,3 +2,9 @@ json
 os
 time
 unittest
+pytest
+logging
+PySide6
+enum
+re
+pyttsx3

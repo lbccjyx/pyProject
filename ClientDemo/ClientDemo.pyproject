@@ -1,0 +1,8 @@
+{
+    "files": [
+        "src/app.py",
+        "cfg/config.py",
+        "src/aWidget.py",
+        "src/form.ui"
+    ]
+}
