@@ -4,13 +4,15 @@ from PySide6.QtGui import QTextCursor
 from ui_form import Ui_Widget
 from CommonClient import common as myCommon
 from CommonClient import AnimationShadowEffect
-
+import os
+from pocketsphinx import LiveSpeech, get_model_path
 import logging
 import re
 
 class AWidget(QWidget):
     def __init__(self):
         super().__init__()
+        self.wakeup_monitor = None
         self.ColorMode = myCommon.DarkNormalMode(self)
         self.ui = Ui_Widget()
         self.ui.setupUi(self)
@@ -58,7 +60,28 @@ class AWidget(QWidget):
         logging.info("on_text_changed")
 
     def Button_create_click(self):
+        self.ui.pushButton_create.setEnabled(False)
+        self.ui.pushButton_create.setText("正在监听中")
+        self.wakeup_monitor = myCommon.ThreadWorker(self.WakeUpMonitor)
+        self.wakeup_monitor.start()
+
         logging.info("Button_create_click")
+
+    def WakeUpMonitor(self):
+        model_path = get_model_path()
+        speech = LiveSpeech(
+            verbose=False,
+            sampling_rate=16000,
+            buffer_size=2048,
+            no_search=False,
+            full_utt=False,
+            hmm=os.path.join(model_path, 'en-us'),
+            lm=os.path.join('..\\cfg\\TAR5567\\', '5567.lm'),
+            dic=os.path.join('..\\cfg\\TAR5567\\', '5567.dic')
+        )
+        for phrase in speech:
+            if str(phrase) in ["hello", "helloo", "HELLO", "HELLOO"]:
+                logging.warning("已唤醒")
 
 
     def on_Mode_changed(self):
