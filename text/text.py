@@ -34,3 +34,21 @@ class Test(unittest.TestCase):
         for phrase in speech:
             if str(phrase) in ["hello", "helloo", "HELLO", "HELLOO"]:
                 print("已唤醒")
+
+    def test_remote_test(self):
+        import paramiko
+        # 创建 SSH 客户端
+        ssh = paramiko.SSHClient()
+        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # 连接到远程 Linux 电电脑
+        ssh.connect('192.168.1.214', username='hotgame', password='PassWord2Hotgame')
+
+        # 执行 shell 脚本
+        stdin, stdout, stderr = ssh.exec_command('sh /home/hotgame/.local/test.sh')
+
+        # 打印执行结果
+        print(stdout.read().decode())
+
+        # 关闭连接
+        ssh.close()
