@@ -42,7 +42,7 @@ class Test(unittest.TestCase):
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
         # 连接到远程 Linux 电电脑
-        ssh.connect('192.168.1.214', username='hotgame', password='PassWord2Hotgame')
+        ssh.connect('192.168.1.1', username='username', password='passwd')
 
         # 执行 shell 脚本
         stdin, stdout, stderr = ssh.exec_command('sh /home/hotgame/.local/test.sh')
