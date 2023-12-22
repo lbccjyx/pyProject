@@ -13,6 +13,7 @@ from PIL import Image
 
 
 import ClientForHJ.cfg.static as static
+import ClientForHJ.cfg.config as config
 
 address = '127.0.0.1'
 port = 0  # 你需要将端口替换为实际的端口号
@@ -170,7 +171,7 @@ def DouyinDownloadSend(iframe, payload_pack):
     # 解决全是1111的id
     userID = checkUserID(userID, user_name)
     if userID not in my_set:
-        success = downloadImg(userHeaderImg, f"{static.tiktokPath}\\{userID}.png")
+        success = downloadImg(userHeaderImg, f"{config.tiktokPath}\\{userID}.png")
         if not success:
             return
         my_set.add(userID)
@@ -185,7 +186,16 @@ def DouyinDownloadSend(iframe, payload_pack):
         "SGift": gift_name,
         "NAddLike": like_cnt or 0
     }
-    logging.info(f"iframe {iframe}  data:{data}")
+
+    match iframe:
+        case -1:
+            logging.info(f"欢迎{user_name}进入直播间")
+        case -2:
+            logging.info(f"{user_name}评论：{content}")
+        case -3:
+            logging.info(f"{user_name}点赞：{like_cnt}个")
+        case -4:
+            logging.info(f"{user_name}送礼物：{gift_name}")
 
     if not IsSendToRa:
         return
@@ -206,7 +216,7 @@ def DownloadSend(iframe, user_name, userID, userHeaderImg, TotalGift, like_cnt, 
         return
 
     if userID not in my_set:
-        success = downloadImg(userHeaderImg, f"{static.BiliBiliPath}\\{userID}.png")
+        success = downloadImg(userHeaderImg, f"{config.BiliBiliPath}\\{userID}.png")
         if not success:
             return
         my_set.add(userID)

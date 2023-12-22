@@ -2,7 +2,7 @@
 import asyncio
 import blivedm
 import blivedm.models.open_live as open_models
-import ClientForHJ.cfg.staticBliBli as staticBliBli
+import ClientForHJ.cfg.config as config
 import socketconn
 
 
@@ -15,10 +15,10 @@ async def run_single_client():
     演示监听一个直播间
     """
     client = blivedm.OpenLiveClient(
-        access_key_id=staticBliBli.ACCESS_KEY_ID,
-        access_key_secret=staticBliBli.ACCESS_KEY_SECRET,
-        app_id=staticBliBli.APP_ID,
-        room_owner_auth_code=staticBliBli.ROOM_OWNER_AUTH_CODE,
+        access_key_id=config.ACCESS_KEY_ID,
+        access_key_secret=config.ACCESS_KEY_SECRET,
+        app_id=config.APP_ID,
+        room_owner_auth_code=config.ROOM_OWNER_AUTH_CODE,
     )
     handler = MyHandler()
     client.set_handler(handler)

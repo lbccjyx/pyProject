@@ -1,8 +1,12 @@
 import os
 
-import yaml
+tiktokPath = "D:\\notes\\duties\\gitTest\\ra2\\mods\\ra2\\uibits\\tiktok"
+BiliBiliPath = "D:\\notes\\duties\\gitTest\\ra2\\mods\\ra2\\uibits\\bilibili"
 
-import ClientForHJ.cfg.static as static
-
-with open(static.resource_path(f"../cfg/config.yml"), 'r') as stream:
-    content = yaml.safe_load(stream)
+# 在开放平台申请的开发者密钥
+ACCESS_KEY_ID = 'vWENGAZYhRbQ3xNl256JgNiU'
+ACCESS_KEY_SECRET = 'ueDT8y7HZVKAhGC6zssQJiFRT17huJ'
+# 在开放平台创建的项目ID
+APP_ID = 1702567517955
+# 主播身份码
+ROOM_OWNER_AUTH_CODE = 'D2Y5OJ2YP88W0'

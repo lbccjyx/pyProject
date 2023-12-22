@@ -3,7 +3,7 @@ from datetime import time
 from functools import partial
 
 from PySide6.QtWidgets import QWidget, QCompleter, QMessageBox, QLineEdit, QFileDialog
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt, QTimer, QFile, QTextStream
 from PySide6.QtGui import QTextCursor, QKeyEvent
 
 import bilibili
@@ -61,12 +61,30 @@ class AWidget(QWidget):
         # logging打印出来的log 显示在self.ui.textBrowser上
         myCommon.LoggingHandler(self.on_log_changed)
 
+        # 打开文件并读取内容
+        file = QFile("../cfg/config.py")
+        if file.open(QFile.ReadOnly | QFile.Text):
+            stream = QTextStream(file)
+            self.ui.textEdit.setPlainText(stream.readAll())
+            file.close()
+
+        # 连接信号和槽
+        self.ui.textEdit.textChanged.connect(self.saveToFile)
+
     def keyPressEvent(self, event: QKeyEvent) -> None:
         if event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
             if isinstance(self.focusWidget(), QLineEdit):
                 self.onConfirm()
         else:
             super().keyPressEvent(event)
+
+    def saveToFile(self):
+        # 当文本编辑器的内容改变时，将新的内容保存到文件中
+        file = QFile("../cfg/config.py")
+        if file.open(QFile.WriteOnly | QFile.Text):
+            stream = QTextStream(file)
+            stream << self.ui.textEdit.toPlainText()
+            file.close()
 
     def onConfirm(self):
         if len(self.ui.edtCommand.text()) > 0:

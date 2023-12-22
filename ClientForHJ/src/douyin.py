@@ -22,8 +22,8 @@ def is_not_delete_tiktokPath():
 
     if today > last_run_date:
         # 删除静态文件
-        static.delete_files_in_directory(static.tiktokPath)
-        static.delete_files_in_directory(static.BiliBiliPath)
+        static.delete_files_in_directory(config.tiktokPath)
+        static.delete_files_in_directory(config.BiliBiliPath)
 
         # 更新标志文件
         with open(flag_file, 'w') as f:

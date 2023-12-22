@@ -1,12 +1,13 @@
 import os
 import sys
 import uuid
+import yaml
 
-tiktokPath = "D:\\notes\\duties\\gitTest\\ra2\\mods\\ra2\\uibits\\tiktok"
-BiliBiliPath = "D:\\notes\\duties\\gitTest\\ra2\\mods\\ra2\\uibits\\bilibili"
 appdata = os.environ['APPDATA']
 portFilename = os.path.join(appdata, 'OpenRA', 'CGamePort.txt')
 #portFilename = r"C:\Users\a\AppData\Roaming\OpenRA\CGamePort.txt"
+
+
 
 
 def read_port_from_file(Filename):
@@ -42,3 +43,7 @@ namespace = uuid.NAMESPACE_DNS
 
 def string_to_uuid(name):
     return uuid.uuid3(namespace, name)
+
+
+with open(resource_path(f"../cfg/config.yml"), 'r') as stream:
+    content = yaml.safe_load(stream)

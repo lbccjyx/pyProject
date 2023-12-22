@@ -4,7 +4,7 @@ import logging
 import os
 import re
 import websocket
-import ClientForHJ.cfg.config as config
+import ClientForHJ.cfg.static as pyconfig
 import time
 import requests
 from protobuf import dy_pb2
@@ -85,8 +85,8 @@ class Douyin:
         headers = {
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,'
                       '*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            'User-Agent':  config.content['douyin']['user_agent'] +
-                          config.content['douyin']['user_agent1'],
+            'User-Agent':  pyconfig.content['douyin']['user_agent'] +
+                          pyconfig.content['douyin']['user_agent1'],
             'cookie': '__ac_nonce=0638733a400869171be51',
         }
 
@@ -96,7 +96,7 @@ class Douyin:
         res_cookies = response.cookies
         ttwid = res_cookies.get_dict().get("ttwid")
         res_origin_text = response.text
-        re_pattern = config.content['douyin']['re_pattern']
+        re_pattern = pyconfig.content['douyin']['re_pattern']
         re_obj = re.compile(re_pattern)
         matches = re_obj.findall(res_origin_text)
         for match_text in matches:
@@ -144,12 +144,12 @@ class Douyin:
                 return
 
         now = str(time.time_ns() // 1000000)
-        ws_url = config.content['douyin']['ws_origin_url'].replace('${room_id}', self.room_info.get('room_id')).replace(
+        ws_url = pyconfig.content['douyin']['ws_origin_url'].replace('${room_id}', self.room_info.get('room_id')).replace(
             '${unique_id}', self.room_info.get('unique_id')).replace('${now}', now)
         headers = {
             'cookie': 'ttwid=' + self.room_info.get('ttwid'),
-            'user-agent': config.content['douyin']['user_agent'] +
-                          config.content['douyin']['user_agent1']
+            'user-agent': pyconfig.content['douyin']['user_agent'] +
+                          pyconfig.content['douyin']['user_agent1']
         }
 
         websocket.enableTrace(False)
