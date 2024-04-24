@@ -1,0 +1,12 @@
+{
+    "linux_id": "127.0.0.1",
+    "linux_username": "name",
+    "linux_password": "pass",
+    "win_HOST": "127.0.0.1",
+    "win_PORT": 65101,
+    "comment": "下面字符串 1:linux ~/gs_svr下有 *str 的文件夹、~/xBattleServer下有xBattleServer*str 的文件夹 2:photo下有对应图片 3:window则需要和远程命令匹配",
+    "linux_gs_app": ["lnp", "mfz", "ml2"],
+    "linux_bs_app": ["lnp", "mfz", "ml2"],
+    "linux_lua_app": ["lnp", "mfz", "ml2"],
+    "win_gs_app": ["md2", "md2bt", "mfls"]
+}

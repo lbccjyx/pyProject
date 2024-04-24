@@ -6,7 +6,7 @@ a = Analysis(
     pathex=['D:/project/PyProjects/pyProject/ClientForRemote/src'],  # 您的项目路径
     binaries=[],
     datas=[('D:/project/PyProjects/pyProject/.venv/Lib/site-packages/PySide6', 'PySide6'),
-            ('D:/project/PyProjects/pyProject/.venv/Lib/site-packages/shiboken6','shiboken6')
+           ('D:/project/PyProjects/pyProject/.venv/Lib/site-packages/shiboken6','shiboken6'),
         ],  # 您的 PySide6 库的路径
     hiddenimports=['json', 'os', 'time', 'unittest', 'pytest','datetime',
         'logging', 'PySide6', 'enum', 're', 'pyttsx3', 'pocketsphinx', 'shiboken6'],  # 您的项目依赖的模块或库

@@ -33,6 +33,11 @@
            <height>0</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">#tableWidget {
+    border-image: url(&quot;../photo/123.png&quot;);
+}</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -76,8 +81,8 @@
         <widget class="QPushButton" name="pushButton_Mode">
          <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>80</height>
+           <width>150</width>
+           <height>40</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -85,6 +90,15 @@
            <width>40</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#pushButton_Mode {
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px; 
+  width: 100px;
+  height: 150px; 
+}</string>
          </property>
          <property name="text">
           <string>主题</string>
@@ -95,9 +109,19 @@
         <widget class="QPushButton" name="pushButton_hide_return">
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>80</height>
+           <width>150</width>
+           <height>40</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#pushButton_hide_return {
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px; 
+  width: 100px;
+  height: 150px; 
+  border-image: url(&quot;../photo/123.png&quot;);
+}</string>
          </property>
          <property name="text">
           <string>确定</string>

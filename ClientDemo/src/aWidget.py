@@ -27,11 +27,11 @@ class AWidget(QWidget):
 
         self.aniblue = AnimationShadowEffect.AnimationShadowEffect(Qt.blue)
         self.aniblue.start()
-        self.ui.LineEdit.setGraphicsEffect(self.aniblue)
+        self.ui.edtTargetLanIP.setGraphicsEffect(self.aniblue)
 
-        self.ui.pushButton_create.clicked.connect(self.Button_create_click)
+        self.ui.pushButton_hide_return.clicked.connect(self.Button_create_click)
         self.ui.pushButton_Mode.clicked.connect(self.on_Mode_changed)
-        self.ui.LineEdit.textChanged.connect(self.on_text_changed)
+        self.ui.edtTargetLanIP.textChanged.connect(self.on_text_changed)
 
         # logging打印出来的log 显示在self.ui.textBrowser上
         myCommon.LoggingHandler(self.on_log_changed)
@@ -42,8 +42,8 @@ class AWidget(QWidget):
 
         # 缓存
         self.TargetLanIPHistory = set()
-        completer = QCompleter(self.TargetLanIPHistory, self.ui.LineEdit)
-        self.ui.LineEdit.setCompleter(completer)
+        completer = QCompleter(self.TargetLanIPHistory, self.ui.edtTargetLanIP)
+        self.ui.edtTargetLanIP.setCompleter(completer)
 
         # 做一个可拉动效果
         splitter = myCommon.QSplitter(self)

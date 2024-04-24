@@ -1,6 +1,8 @@
 from logging import LogRecord
 import logging
 from enum import Enum
+import re
+
 from PySide6.QtWidgets import QWidget, QSplitter, QSplitterHandle
 from PySide6.QtCore import QRegularExpression, QThread, Signal, QObject, Qt
 from PySide6.QtGui import QRegularExpressionValidator
@@ -59,6 +61,7 @@ class TextEditHandler(logging.Handler):
 
     def emit(self, record: logging.LogRecord):
         msg = self.format(record)
+
         if record.levelno == logging.INFO:
             color = "black"
         elif record.levelno == logging.WARNING:
@@ -71,8 +74,23 @@ class TextEditHandler(logging.Handler):
         self.emitter.file_modified.emit(f'<p style="color: {color};">{msg}</p>')
 
     def format(self, record: LogRecord) -> str:
+
+        # 清理消息字符串
+        # record.msg = clean_output(record.msg)
+        # 使用正则表达式匹配并提取关键部分
+        match = re.search(r'\[?2004.(.*?)\[\?2004*', record.msg, re.DOTALL)
+        if match:
+            record.msg = match.group(1).strip()
+            matches = re.findall(r'\[01;34m(.*?)\[0m', record.msg)
+            if matches:
+                record.msg =matches
+
         return self.formatter.format(record)
 
+def clean_output(raw_output):
+    # 清理字符串，移除控制字符和乱码
+    cleaned_output = ''.join(char for char in raw_output if 32 <= ord(char) <= 126)
+    return cleaned_output
 
 # 需要和 MyLogController 的 logging 配合使用
 def LoggingHandler(callback_function: any):
