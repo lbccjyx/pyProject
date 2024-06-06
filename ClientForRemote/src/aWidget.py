@@ -34,11 +34,12 @@ class BaseButton(QPushButton):
         self.setFont(font)
         self.setAutoFillBackground(False)
         self.clicked.connect(self.on_base_click)
+        self.timerInterval = 10000
 
     def on_base_click(self):
         self.on_forbidden()
         self.on_click()
-        QTimer.singleShot(10000, self.on_timer)  # 10秒后执行函数
+        QTimer.singleShot(self.timerInterval, self.on_timer)  # 10秒后执行函数
 
     def on_timer(self):
         pass
@@ -180,13 +181,9 @@ class LinuxUploadButton(BaseButton):
         self.button_name = btn_name
 
     def on_forbidden(self):
-        self.setEnabled(False) #禁用按钮
-        self.setStyleSheet(f"background: url(\"photo/dark_{self.button_name}.png\");\n"
-                           "color: black;\n"
-                           "border-radius: 20;")
+        pass
 
     def on_click(self):
-        logging.info(self.button_name)
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly
         file_name, _ = QFileDialog.getOpenFileName(None, "选择 Lua 文件", "", "Lua Files (*.lua)", options=options)
@@ -202,18 +199,7 @@ class LinuxUploadButton(BaseButton):
             sftp.close()
 
     def on_timer(self):
-        logging.info(f"{self.button_name} callback suc")
-
-        command = f"stat -c %y  {self.new_path}"
-        self.linux_ssh_channel.send(command + '\n')
-        if self.linux_ssh_channel.recv_ready():
-            output = self.linux_ssh_channel.recv(1024).decode()
-            logging.info(f"此lua文件的时间为:{output} 如果是最新则上传成功")
-
-        self.setEnabled(True)  # 禁用按钮
-        self.setStyleSheet(f"background: url(\"photo/{self.button_name}.png\");\n"
-                           "color: black;\n"
-                           "border-radius: 20;")
+        pass
 
 
 class AWidget(QWidget):
