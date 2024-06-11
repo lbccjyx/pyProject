@@ -24,6 +24,7 @@ class myConfig:
         self.win_HOST = configJson["win_HOST"]
         self.win_PORT = configJson["win_PORT"]
         self.linux_gs_app = configJson["linux_gs_app"]
+        self.docker_gs_app = configJson["docker_gs_app"]
         self.linux_bs_app = configJson["linux_bs_app"]
         self.linux_lua_app = configJson["linux_lua_app"]
         self.win_gs_app = configJson["win_gs_app"]

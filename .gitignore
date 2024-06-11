@@ -3,3 +3,10 @@
 **__pycache__**
 *pyproject.user
 ui_*
+_internal*
+build*
+ASRT_SpeechRecognition-master
+dist
+photo
+*png
+*psd
